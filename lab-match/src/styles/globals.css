@@ -1,0 +1,35 @@
+/* styles/globals.css */
+
+/* Reset default margins and paddings */
+html, body, #__next {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Roboto', sans-serif; /* Ensure MUI's default font */
+  background-color: #F5F5F5; /* Off-grey background */
+  color: #333333; /* Default text color */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Ensure no gap between navbar and top of the screen */
+body {
+  margin: 0;
+}
+
+
+.main-layout {
+  display: flex;
+}
+
+
+.content-container {
+  transform: translateY(60px);
+  flex-grow: 1;
+  padding: 16px;
+  overflow: auto;
+  width: 100%;
+}
