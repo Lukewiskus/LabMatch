@@ -48,6 +48,7 @@ def search_entities(query):
         retval = []
         for index, row in enumerate(rows):  # Use enumerate to get index and row
             obj = {}
+            obj["authorId"] = row[0]
             obj["name"] = row[1]
             obj["h-index"] = row[4]
             retval.append(obj)

@@ -1,8 +1,13 @@
 import SearchBar from "@/components/searchBar";
 import FlexBox from "@/components/flexBox";
+import AuthorCard from "@/components/authorCard"
 import styles from "@/styles/Home.module.css";
-
+import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 import { useState } from "react";
+import { Typography } from "@mui/material";
 
 const filterData = (query, data) => {
   if (!query) {
@@ -12,22 +17,15 @@ const filterData = (query, data) => {
   }
 };
 
-const data = [
-  "Paris",
-  "London",
-  "New York",
-  "Tokyo",
-  "Berlin",
-  "Buenos Aires",
-  "Cairo",
-  "Canberra",
-  "Rio de Janeiro",
-  "Dublin"
-];
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 export default function Home() {
-  const [searchQuery, setSearchQuery] = useState("");
-
   const [searchResults, setSearchResults] = useState({})
 
   return (
@@ -38,13 +36,26 @@ export default function Home() {
         <FlexBox >
         <SearchBar setSearchResults={setSearchResults} />
         </FlexBox>
-        
-        <ul>
-          {searchResults?.authors?.map((author, index) => (
-            <li key={index}>{author["name"]}, H-Index: {author["h-index"]}</li>
-          ))}
-        </ul>
-        
+        <FlexBox>
+        <Typography>
+          Dont see the researcher you&apos;re looking for? Enter their name here and we will collect their publication data for you
+        </Typography>
+        </FlexBox>
+        <FlexBox >
+          <Box sx={{ flexGrow: 1, padding: 2, maxWidth:"50%" }}>
+            <Grid container spacing={3}  >
+              {searchResults?.authors?.map((author, index) => (
+                <Grid key={index} item xs={6} sx={{maxWidth: "100px"}}>
+                  <AuthorCard
+                    authorId={author["authorId"]}
+                    AuthorName={author["name"]}
+                    HIndex={author["h-index"]}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        </FlexBox>
       </div>
   );
 }
