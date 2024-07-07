@@ -64,3 +64,46 @@ def search_entities(query):
         if connection:
             pool.putconn(connection)
             print("PostgreSQL connection is returned to the pool")
+            
+            
+def get_author_details(id):
+    connection = None
+    try:
+        # Get a connection from the pool
+        connection = pool.getconn()
+
+        # Create a cursor to perform database operations
+        cursor = connection.cursor()
+
+        # SQL query with parameterized query for search
+        
+        sql_query = """
+                    select * from lu_author where author_id = %s;
+                    """
+        
+        # Replace with your actual table name and column
+
+        # Execute the SQL query with the search_query as parameter
+        cursor.execute(sql_query, (id, ))  # Note the use of tuple for parameters
+
+        # Fetch all rows from the result set
+        rows = cursor.fetchall()
+
+        row = rows[0]
+        obj = {}
+        obj["authorId"] = row[0]
+        obj["name"] = row[1]
+        obj["hindex"] = row[4]
+
+        return obj  # Return the rows fetched
+
+    except (Exception, Error) as error:
+        print("Error while fetching data from PostgreSQL:", error)
+        return None
+
+    finally:
+        # Release the connection back to the pool
+        if connection:
+            pool.putconn(connection)
+            print("PostgreSQL connection is returned to the pool")
+    

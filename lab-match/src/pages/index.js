@@ -6,16 +6,8 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Typography } from "@mui/material";
-
-const filterData = (query, data) => {
-  if (!query) {
-    return data;
-  } else {
-    return data.filter((d) => d.toLowerCase().includes(query));
-  }
-};
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -37,9 +29,6 @@ export default function Home() {
         <SearchBar setSearchResults={setSearchResults} />
         </FlexBox>
         <FlexBox>
-        <Typography>
-          Dont see the researcher you&apos;re looking for? Enter their name here and we will collect their publication data for you
-        </Typography>
         </FlexBox>
         <FlexBox >
           <Box sx={{ flexGrow: 1, padding: 2, maxWidth:"50%" }}>
@@ -56,6 +45,10 @@ export default function Home() {
             </Grid>
           </Box>
         </FlexBox>
+        { searchResults?.authors != undefined ? 
+                <Typography>
+                Dont see the researcher you&apos;re looking for? Enter their name here and we will collect their publication data for you
+              </Typography> : <></> }
       </div>
   );
 }

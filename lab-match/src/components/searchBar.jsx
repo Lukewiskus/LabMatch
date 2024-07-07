@@ -25,7 +25,7 @@ const SearchBar = ({setSearchResults}) => {
     };
 
     const handleKeyPress = (event) => {
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter' && query != "") {
           handleSubmit(event);
         }
       };
@@ -39,6 +39,7 @@ const SearchBar = ({setSearchResults}) => {
                 onKeyPress={handleKeyPress}
                 placeholder="Search..."
                 className={styles.searchInput}
+                required
             />
             <button type="submit" className={styles.searchButton}>Search</button>
         </form>
