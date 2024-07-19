@@ -39,7 +39,12 @@ def get_and_insert_google_scholar_data(name, author_id, pool):
     if not author:
         name_with_spaces = name.replace('-', ' ')
         author = fetch_author_data(name_with_spaces)
-        
+    
+    if not author:
+        name_arr =  name.split()
+        if len(name_arr) == 3:
+            name = name_arr[0] + " " + name_arr[2]
+        author = fetch_author_data(name)
     if author:
         try:
             author_data = {
