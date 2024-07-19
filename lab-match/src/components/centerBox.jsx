@@ -1,20 +1,21 @@
-// CenteredRow.tsx
 import React from 'react';
 import { Box } from '@mui/material';
 
-const FlexBox = ({ children, flex_gap="100px", sx = {} }) => {
+const CenterBox = ({ children, sx = {} }) => {
   return (
     <Box
       display="flex"
       justifyContent="center"
       alignItems="center"
       flexDirection="row"
-      gap={flex_gap}
+      gap="100px"
       sx={{ width: '100%', height: '100%', ...sx }}
     >
-      {children}
+      <div>
+        {children}
+      </div>
     </Box>
   );
 };
 
-export default FlexBox;
+export default CenterBox;

@@ -3,20 +3,21 @@
 import React, { useState } from 'react';
 import styles from "@/styles/searchBar.module.css";
 
-const SearchBar = ({setSearchResults}) => {
+const SearchBar = ({setSearchResults, setLoading}) => {
     const [query, setQuery] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+        setLoading(true)
         await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/search?query=${encodeURIComponent(query)}`)
             .then((response) => response.json())
              .then(data => {
-                console.log(data)
                 setSearchResults({authors: data})
+                setLoading(false)
             })
             .catch((error) => {
-            console.error('Error fetching data:', error);
+                setLoading(false)
+                setSearchResults({authors: []})
             });
     };
 

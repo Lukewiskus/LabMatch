@@ -34,6 +34,11 @@ services:
       - backend
     networks:
       - app_network
+  
+  collect-author-data:
+    build: 
+      context: ./service/collect-pi-data
+      dockerfile: Dockerfile
 
 networks:
   app_network:

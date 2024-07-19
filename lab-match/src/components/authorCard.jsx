@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 
 
 const AuthorCard = ({ authorId, AuthorName, HIndex }) => {
-    const router = useRouter();
+    const router = useRouter()
 
     const handleAuthorClick = (id) => {
       router.push(`/author/${id}`);
