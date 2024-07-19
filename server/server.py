@@ -16,7 +16,9 @@ def search_database():
 def get_author():
     sleep(1)
     id = request.args.get('id')
+    print(id)
     retval = get_author_details(id)
+    print(retval)
     return jsonify(retval)
 
 @app.route("/is-author-in-db")

@@ -73,7 +73,13 @@ def search_entities(query):
             pool.putconn(connection)
             print("PostgreSQL connection is returned to the pool")
             
-            
+
+def get_year(date_str):
+    parts = date_str.split()
+    if len(parts) == 0:
+        return None  # Return None if the string is empty or has no parts
+    return parts[-1]  # Return the last part which should be the year
+   
 def get_author_details(id):
     connection = None
     try:
@@ -140,50 +146,35 @@ def get_author_details(id):
 
         obj = {}
         
+        scholar_id = row[1]
+        
         obj["authorId"] = row[0]
-        obj["google_scholar_id"] = row[1]
         obj["name"] = row[2]
         obj["affiliation"] = row[3]
         obj["email"] = row[4]
         obj["lab_id"] = row[5]
         obj["h_index"] = row[6]
-        obj["google_h_index"] = row[7]
-        obj["google_h_index5y"] = row[8]
-        obj["google_i_index"] = row[9]
-        obj["google_i_index5y"] = row[10]
-        obj["google_homepage"] = row[11]
-        if row[12] is not None:
-            clean_string =  row[12].replace("\\", "")
-            citation_obj = json.loads(clean_string)
-            obj["google_cites_per_year"] = citation_obj
-        else:
-            obj["google_cites_per_year"] = None
+        
+        if scholar_id is not None:
+            obj["google_scholar_id"] = scholar_id
+            obj["google_h_index"] = row[7]
+            obj["google_h_index5y"] = row[8]
+            obj["google_i_index"] = row[9]
+            obj["google_i_index5y"] = row[10]
+            obj["google_homepage"] = row[11]
+            if row[12] is not None:
+                print("3")
+                clean_string =  row[12].replace("\\", "")
+                citation_obj = json.loads(clean_string)
+                obj["google_cites_per_year"] = citation_obj
+            else:
+                obj["google_cites_per_year"] = None
+                print("4")
         obj["create_date_utc"] = row[13]
         obj["last_modified_date_utc"] = row[14]
         obj["total_pubmed_publications"] = row[15]
-        obj["dates_published"] = [dates.split()[-1] for dates in row[16]]
-        
-        #  la.author_id, 
-        #                 la.google_scholar_id, 
-        #                 la.name, 
-        #                 la.affiliation, 
-        #                 la.email, 
-        #                 la.lab_id, 
-        #                 la.h_index, 
-        #                 la.google_h_index, 
-        #                 la.google_h_index5y,
-        #                 la.google_i_index, 
-        #                 la.google_i_index5y, 
-        #                 la.google_homepage, 
-        #                 la.google_cites_per_year, 
-        #                 la.create_date_utc, 
-        #                 la.last_modified_date_utc, 
-        #                 COUNT(rap.pid_array),
-        #                 ARRAY_AGG(lar.date_published) AS dates_published
-        
-
-
-        return obj  # Return the rows fetched
+        obj["dates_published"] = [get_year(date)for date in row[16]]
+        return obj 
 
     except (Exception, Error) as error:
         print("Error while fetching data from PostgreSQL:", error)

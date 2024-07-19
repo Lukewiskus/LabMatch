@@ -49,8 +49,6 @@ def poll_database():
         if row:
             queue_id, name = row
             process_task(queue_id, name)
-        else:
-            print("No tasks found.")
         
     except (Exception, Error) as error:
         print("Error while fetching data from PostgreSQL poll_database:", error)
