@@ -25,7 +25,6 @@ def fetch_author_data(name):
     author = None
     search_query = scholarly.search_author(name)
     try:
-        error = 10/0
         author = next(search_query)
         author = scholarly.fill(author, sections=['basics', 'citations', 'indices', 'counts'])
         return author
