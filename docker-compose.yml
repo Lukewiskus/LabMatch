@@ -23,12 +23,6 @@ services:
     networks:
       - app_network
 
-  crccheck:
-    container_name: crccheck
-    image: crccheck/hello-world
-    expose:
-        - 8000
-
   nginx:
     container_name: nginx
     restart: unless-stopped
