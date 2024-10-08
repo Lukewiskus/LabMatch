@@ -3,7 +3,7 @@ version: "3"
 services:
   frontend:
     build:
-      context: ./lab-match
+      context: ./lab-match-app-router
       dockerfile: Dockerfile
       args:
         NEXT_PUBLIC_BASE_URL: /rest
