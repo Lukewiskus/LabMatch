@@ -1,0 +1,4 @@
+useful resources for https setup
+https://www.f5.com/company/blog/nginx/using-free-ssltls-certificates-from-lets-encrypt-with-nginx
+https://www.programonaut.com/setup-ssl-with-docker-nginx-and-lets-encrypt/
+https://www.youtube.com/watch?v=J9jKKeV1XVE
