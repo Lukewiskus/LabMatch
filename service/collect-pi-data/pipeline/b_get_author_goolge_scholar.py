@@ -26,7 +26,8 @@ def fetch_author_data(name):
     search_query = scholarly.search_author(name)
     try:
         author = next(search_query)
-        author = scholarly.fill(author, sections=['basics', 'citations', 'indices', 'counts'])
+        author = scholarly.fill(author, sections=['basics', 'citations', 'indices', 'counts', 'publications'])
+        print(author)
         return author
     except StopIteration as error:
         raise PipelineError("Function: fetch_author_data", 2, error) from error

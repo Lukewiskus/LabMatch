@@ -163,13 +163,11 @@ def get_author_details(id):
             obj["google_i_index5y"] = row[10]
             obj["google_homepage"] = row[11]
             if row[12] is not None:
-                print("3")
                 clean_string =  row[12].replace("\\", "")
                 citation_obj = json.loads(clean_string)
                 obj["google_cites_per_year"] = citation_obj
             else:
                 obj["google_cites_per_year"] = None
-                print("4")
         obj["create_date_utc"] = row[13]
         obj["last_modified_date_utc"] = row[14]
         obj["total_pubmed_publications"] = row[15]

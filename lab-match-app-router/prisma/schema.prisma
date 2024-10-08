@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model er_collect_author_data_errors {
+  queue_id        Int?
+  step            Int?
+  error           String   @db.VarChar(255)
+  logged_date_utc DateTime @default(now()) @db.Timestamp(6)
+
+  @@ignore
+}
+
+model lu_article {
+  pid                    Int       @id
+  title                  String?   @db.VarChar(255)
+  abstract               String?
+  journal_title          String?   @db.VarChar(255)
+  journal_id             Int?
+  doi                    String?   @db.VarChar(255)
+  date_published         String?   @db.VarChar
+  authors                String[]  @db.VarChar
+  create_date_utc        DateTime? @default(now()) @db.Timestamp(6)
+  last_modified_date_utc DateTime? @db.Timestamp(6)
+}
+
+model lu_author {
+  author_id              Int       @id @default(autoincrement())
+  google_scholar_id      String?   @db.VarChar(255)
+  name                   String    @db.VarChar(255)
+  affiliation            String?   @db.VarChar(255)
+  email                  String?   @db.VarChar(255)
+  lab_id                 Int?
+  h_index                Float?    @db.Real
+  google_h_index         Float?    @db.Real
+  google_h_index5y       Float?    @db.Real
+  google_i_index         Float?    @db.Real
+  google_i_index5y       Float?    @db.Real
+  google_homepage        String?   @db.VarChar(255)
+  google_cites_per_year  String?
+  create_date_utc        DateTime  @default(now()) @db.Timestamp(6)
+  last_modified_date_utc DateTime? @db.Timestamp(6)
+}
+
+model lu_collect_author_data_queue {
+  queue_id           Int       @id @default(autoincrement())
+  name               String    @db.VarChar(255)
+  create_date_utc    DateTime  @db.Timestamp(6)
+  completed_date_utc DateTime? @db.Timestamp(6)
+  step               Int?
+  author_id          Int?
+}
+
+model lu_user {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique @db.VarChar(255)
+  name      String?   @db.VarChar(255)
+  avatar    String?   @db.VarChar(255)
+  createdat DateTime? @default(now()) @db.Timestamp(6)
+  updatedat DateTime? @db.Timestamp(6)
+}
+
+model rel_author_pids {
+  author_id              Int       @id
+  pids                   Int[]
+  create_date_utc        DateTime  @db.Timestamp(6)
+  last_modified_date_utc DateTime? @db.Timestamp(6)
+}
+
+model rel_pid_citations {
+  pid                    Int       @id
+  citation_pids          Int[]
+  create_date_utc        DateTime? @default(now()) @db.Timestamp(6)
+  last_modified_date_utc DateTime? @db.Timestamp(6)
+}
