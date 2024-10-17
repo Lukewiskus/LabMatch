@@ -17,6 +17,9 @@ COPY . .
 ARG NEXT_PUBLIC_BASE_URL
 ENV NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
 
+# Run Prisma generate to build the client
+RUN npx prisma generate
+
 # Build the application
 RUN npm run build
 
