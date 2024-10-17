@@ -29,7 +29,7 @@ export default function Home() {
           Welcome to LabMatch! Search for the name of the Principal Investigator to see the informamation of their Lab collected
         </Typography >
         <FlexBox >
-        <SearchBar setSearchResults={setSearchResults} setLoading={setLoading} />
+          <SearchBar setSearchResults={setSearchResults} setLoading={setLoading} />
         </FlexBox>
         <FlexBox />
         <FlexBox >

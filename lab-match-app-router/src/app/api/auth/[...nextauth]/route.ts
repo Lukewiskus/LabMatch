@@ -22,7 +22,7 @@ const authOption: NextAuthOptions = {
       if (!profile?.email) {
         throw new Error('No profile')
       }
-
+      
       await prisma.lu_user.upsert({
         where: {
           email: profile.email,

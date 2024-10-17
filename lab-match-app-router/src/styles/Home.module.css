@@ -1,0 +1,8 @@
+.homeWrapper {
+    margin: 0;
+}
+
+.homeWrapper > p {
+    width: 0 auto;
+    text-align: center;
+}

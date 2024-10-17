@@ -10,7 +10,6 @@ const LayOut = ({ children }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleDrawer = () => {
-    console.log(isSidebarOpen)
     setIsSidebarOpen(!isSidebarOpen);
   };
   
