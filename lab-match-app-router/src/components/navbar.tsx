@@ -10,11 +10,26 @@ import {
   Container,
   Typography,
   Box,
+  IconButton,
+  Avatar,
+  Menu,
+  MenuItem,
 } from '@mui/material';
+import { useState } from "react";
+import { signIn } from 'next-auth/react';
 
 export const NavBar: React.FC = () => {
   const { data: session } = useSession();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
+  const handleMenuOpen = (event : any) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <AppBar position="fixed" id="navbar" sx={{ backgroundColor: '#1976d2' }}>
       <Container>
@@ -39,16 +54,36 @@ export const NavBar: React.FC = () => {
 
           {/* Right side - Session Info */}
           <Box sx={{ marginLeft: 'auto' }}>
-            {session ? (
-              <Button sx={{ textDecoration: 'none', color: 'white', marginLeft: 2 }}>
-                Login
-              </Button>
-            ) : (
-              <Typography sx={{ color: 'white', marginLeft: 2 }}>
-                Ur Signed in teehee
-              </Typography>
-            )}
-          </Box>
+          {session ? (
+            <>
+              <IconButton onClick={handleMenuOpen} sx={{ color: 'white' }}>
+                <Avatar alt="Profile Icon" src="/profile-pic-url" />
+                </IconButton>
+                <Menu
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleMenuClose}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                >
+                  <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
+                </Menu>
+                </>
+              ) : (
+                <Button
+                  sx={{ textDecoration: 'none', color: 'white', marginLeft: 2 }}
+                    onClick={() => signIn()}
+                  >
+                    Login
+                  </Button>
+              )}
+              </Box>
         </Toolbar>
       </Container>
     </AppBar>
