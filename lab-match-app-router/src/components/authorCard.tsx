@@ -8,7 +8,6 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { useRouter } from 'next/navigation';
 
-// Define the props interface
 interface AuthorCardProps {
   authorId: number; // or string, depending on your author ID type
   AuthorName: string;

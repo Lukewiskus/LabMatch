@@ -14,15 +14,6 @@ services:
     environment:
       - NEXT_PUBLIC_BASE_URL=/rest
 
-  backend:
-    build:
-      context: ./server
-      dockerfile: Dockerfile
-    ports:
-      - "5000:5000"
-    networks:
-      - app_network
-
   nginx:
     container_name: nginx
     restart: unless-stopped
@@ -36,7 +27,6 @@ services:
         - /etc/letsencrypt/live/labsreputation.com/privkey.pem:/etc/letsencrypt/live/labsreputation.com/privkey.pem
     depends_on:
       - frontend
-      - backend
     networks:
       - app_network
   collect-author-data:

@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Link, Typography } from '@mui/material'
 import SearchBar from '@/components/searchBar'
 import FlexBox from '@/components/flexBox'
 import SearchResults from '@/components/searchResults'
@@ -19,6 +19,9 @@ export default async function Home() {
           </FlexBox>
           <FlexBox >
             <SearchResults />
+          </FlexBox>
+          <FlexBox>
+            <Typography>If you want to find information on a specific PI that we do not have the data for, input their information <Link href="/submit-author">here</Link></Typography>
           </FlexBox>
           <FlexBox  />
         </Box>

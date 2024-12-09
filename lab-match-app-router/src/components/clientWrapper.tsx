@@ -2,9 +2,10 @@
 
 import { StateProvider } from "@/context/Context";
 import { ReactNode } from "react";
-import { NavBar } from "./navbar";
+
 import "@/styles/Layout.module.css";
 import { Box } from "@mui/material";
+import { NavBar } from "./navbar/navbar";
 
 const ClientWrapper = ({ children }: { children: ReactNode }) => {
   return (

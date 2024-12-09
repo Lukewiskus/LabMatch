@@ -42,6 +42,7 @@ const SearchBar: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch({ type: 'LOADING', payload: { isLoading: true } });
+    dispatch({ type: 'SET-HAS-INITIAL-SEARCH', payload: { hasInitalSearch: true } });
     searchResults()
   };
 

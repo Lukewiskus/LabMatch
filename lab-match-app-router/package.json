@@ -13,17 +13,24 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.7",
     "@mui/material": "^6.1.4",
     "@prisma/client": "^5.20.0",
+    "axios": "^1.7.7",
     "next": "14.2.14",
     "next-auth": "^4.24.8",
     "react": "^18",
-    "react-dom": "^18"
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18",
+    "sass": "^1.81.0",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/ws": "^8.5.13",
+    "@types/xml2js": "^0.4.14",
     "prisma": "^5.20.0",
     "typescript": "^5"
   }

@@ -1,0 +1,39 @@
+.submit-author-wrapper {
+    .author-input-form {
+        width: 30%;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        input {
+            flex: 1;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            margin-right: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-right: 16px;
+            background-color: #0070f3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0058b3;
+        }
+    }
+
+        
+}
+
+
+
+
+

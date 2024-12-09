@@ -1,20 +1,22 @@
-"use client"; // Ensure this is present at the top
-
+"use client"; 
 import { SearchAuthorResults } from '@/interfaces/searchAuthorResults';
 import { createContext, useContext, ReactNode, useReducer } from 'react';
 
 export interface State {
   isLoading: boolean;
+  hasInitalSearch: boolean;
   searchAuthorResults: SearchAuthorResults[]
 }
 
 export const initialState: State = {
   isLoading: false,
+  hasInitalSearch: false,
   searchAuthorResults: []
 };
 
 export type Action = { type: 'LOADING'; payload: { isLoading: boolean } }
-                      | {type: 'SET-SEARCH-AUTHORS'; payload: { searchResults : SearchAuthorResults[]}};
+                      | {type: 'SET-SEARCH-AUTHORS'; payload: { searchResults : SearchAuthorResults[]}}
+                      | {type: 'SET-HAS-INITIAL-SEARCH'; payload: { hasInitalSearch : boolean}};
 
 export const stateReducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -28,6 +30,11 @@ export const stateReducer = (state: State, action: Action): State => {
           ...state,
           searchAuthorResults: action.payload.searchResults,
         };
+      case 'SET-HAS-INITIAL-SEARCH':
+      return {
+        ...state,
+        hasInitalSearch: action.payload.hasInitalSearch,
+      };
     default:
       return state;
   }
